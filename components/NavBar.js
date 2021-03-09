@@ -1,36 +1,46 @@
-import { Navbar, NavDropdown, Nav } from 'react-bootstrap';
+// React Bootstrap
+import { Navbar, Nav } from 'react-bootstrap';
+// Component
+import AppLink from './AppLink';
 
 const NavBar = () => {
     return (
         <div className="navbar-wrapper">
             <Navbar expand="lg" className="navbar-dark fj-mw9">
-                <Navbar.Brand className="mr-3 font-weight-bold" href="#">
+                <AppLink
+                    href="/"
+                    className="navbar-brand mr-3 font-weight-bold"
+                >
                     Porty
-                </Navbar.Brand>
+                </AppLink>
+
                 <Navbar.Toggle />
 
                 <Navbar.Collapse>
                     <Nav className="mr-auto">
-                        <Nav.Link className="mr-3" href="#">
+                        <AppLink href="/portfolio" className="mr-3 nav-link">
                             Portfolio
-                        </Nav.Link>
-                        <Nav.Link className="mr-3" href="#">
+                        </AppLink>
+                        <AppLink
+                            href="/forum/categories"
+                            className="mr-3 nav-link"
+                        >
                             Forum
-                        </Nav.Link>
-                        <Nav.Link className="mr-3" href="#">
+                        </AppLink>
+                        <AppLink href="/cv" className="mr-3 nav-link">
                             Cv
-                        </Nav.Link>
+                        </AppLink>
                     </Nav>
                     <Nav>
-                        <Nav.Link className="mr-3" href="#">
+                        <AppLink href="/login" className="mr-3 nav-link">
                             Sign Up
-                        </Nav.Link>
-                        <Nav.Link
+                        </AppLink>
+                        <AppLink
+                            href="/register"
                             className="mr-3 btn btn-success bg-green-2 bright"
-                            href="#"
                         >
                             Sign In
-                        </Nav.Link>
+                        </AppLink>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
