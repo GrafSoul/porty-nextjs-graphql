@@ -1,6 +1,5 @@
 const Home = () => (
     <>
-        {/* HOME PAGE STARTS */}
         <section className="section-title">
             <div className="px-2">
                 <div className="pt-5 pb-4">
@@ -149,9 +148,7 @@ const Home = () => (
         <a href="" className="btn btn-main bg-blue ttu">
             See More Posts
         </a>
-        {/* HOME PAGE ENDS */}
 
-        {/* REPLIER STARTS */}
         {/* <div className='reply-controls is-open'> */}
         <div className="reply-controls">
             <div className="reply-area">
@@ -194,7 +191,6 @@ const Home = () => (
                 </div>
             </div>
         </div>
-        {/* REPLIER ENDS */}
     </>
 );
 

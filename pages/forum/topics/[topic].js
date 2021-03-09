@@ -1,10 +1,6 @@
-// Components
-import NavBar from '@/components/NavBar';
-
 const Posts = () => {
     return (
         <>
-            <NavBar />
             <div className="container">
                 <section className="section-title">
                     <div className="px-2">
