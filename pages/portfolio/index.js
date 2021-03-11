@@ -1,3 +1,5 @@
+// Router
+import Link from 'next/link';
 // Axios
 import axios from 'axios';
 // Component
@@ -42,7 +44,14 @@ const Portfolio = ({ portfolios }) => {
                     {portfolios &&
                         portfolios.map((portfolio) => (
                             <div key={portfolio._id} className="col-md-4">
-                                <PortfolioCard portfolio={portfolio} />
+                                <Link
+                                    href="/portfolio/[id]"
+                                    as={`/portfolio/${portfolio._id}`}
+                                >
+                                    <a className="card-link">
+                                        <PortfolioCard portfolio={portfolio} />
+                                    </a>
+                                </Link>
                             </div>
                         ))}
                 </div>
