@@ -71,6 +71,19 @@ const graphUpdatePortfolio = (id) => {
         .then((data) => data.updatePortfolio);
 };
 
+const graphDeletePortfolio = (id) => {
+    const query = `
+    mutation DeletePortfolio {
+        deletePortfolio(id: "${id}")
+    }
+    `;
+
+    return axios
+        .post('http://localhost:3000/graphql', { query })
+        .then(({ data: graph }) => graph.data)
+        .then((data) => data.deletePortfolio);
+};
+
 const fetchPortfolios = () => {
     const query = `
         query Portfolios {
@@ -111,6 +124,14 @@ const Portfolio = ({ data }) => {
         setPortfolios(newPortfolios);
     };
 
+    const deletePortfolio = async (id) => {
+        const deletedId = await graphDeletePortfolio(id);
+        const index = portfolios.findIndex((item) => item._id === deletedId);
+        const newPortfolios = portfolios.slice();
+        newPortfolios.splice(index, 1);
+        setPortfolios(newPortfolios);
+    };
+
     return (
         <>
             <section className="section-title">
@@ -141,12 +162,21 @@ const Portfolio = ({ data }) => {
                                     </a>
                                 </Link>
                                 <button
-                                    className="btn btn-sm btn-secondary ml-2 mt-2"
+                                    className="btn btn-sm btn-warning ml-2 mt-2"
                                     onClick={() =>
                                         updatePortfolio(portfolio._id)
                                     }
                                 >
                                     Update Portfolio
+                                </button>
+
+                                <button
+                                    className="btn btn-sm btn-danger ml-2 mt-2"
+                                    onClick={() =>
+                                        deletePortfolio(portfolio._id)
+                                    }
+                                >
+                                    Delete Portfolio
                                 </button>
                             </div>
                         ))}
