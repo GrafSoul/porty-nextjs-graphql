@@ -39,6 +39,38 @@ const graphCreatePortfolio = () => {
         .then((data) => data.createPortfolio);
 };
 
+const graphUpdatePortfolio = (id) => {
+    const query = `
+    mutation UpdatePortfolio {
+        updatePortfolio(id: "${id}", input: {   
+            title: "Work in Srakastan"
+            company: "Churki LTD Co",
+            companyWebsite: "www.chorsu.com"
+            location: "Uzbekistan, Goparino"
+            jobTitle: "Dvornik"
+            description: "Было все очень плохо"
+            startDate: "01/01/2030"
+            endDate: "01/01/2031"     
+            }) {
+                _id
+                title
+                company
+                companyWebsite
+                location
+                jobTitle
+                description
+                startDate
+                endDate  
+            }
+        }
+    `;
+
+    return axios
+        .post('http://localhost:3000/graphql', { query })
+        .then(({ data: graph }) => graph.data)
+        .then((data) => data.updatePortfolio);
+};
+
 const fetchPortfolios = () => {
     const query = `
         query Portfolios {
@@ -71,6 +103,14 @@ const Portfolio = ({ data }) => {
         setPortfolios(newPortfolios);
     };
 
+    const updatePortfolio = async (id) => {
+        const updatedPortfolio = await graphUpdatePortfolio(id);
+        const index = portfolios.findIndex((item) => item._id === id);
+        const newPortfolios = portfolios.slice();
+        newPortfolios[index] = updatedPortfolio;
+        setPortfolios(newPortfolios);
+    };
+
     return (
         <>
             <section className="section-title">
@@ -100,6 +140,14 @@ const Portfolio = ({ data }) => {
                                         <PortfolioCard portfolio={portfolio} />
                                     </a>
                                 </Link>
+                                <button
+                                    className="btn btn-sm btn-secondary ml-2 mt-2"
+                                    onClick={() =>
+                                        updatePortfolio(portfolio._id)
+                                    }
+                                >
+                                    Update Portfolio
+                                </button>
                             </div>
                         ))}
                 </div>
