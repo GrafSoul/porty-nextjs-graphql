@@ -1,9 +1,43 @@
+// Core
+import { useState } from 'react';
 // Router
 import Link from 'next/link';
 // Axios
 import axios from 'axios';
 // Component
 import PortfolioCard from '@/components/PortfolioCard';
+
+const graphCreatePortfolio = () => {
+    const query = `
+        mutation CreatePortfolio {
+            createPortfolio(input: {
+                title: "Work in Uzbekistan"
+                company: "Chorsu LTD Co",
+                companyWebsite: "www.chorsu.com"
+                location: "Uzbekistan, Goparino"
+                jobTitle: "Dvornik"
+                description: "Было все очень плохо"
+                startDate: "01/01/2030"
+                endDate: "01/01/2031"
+            }) {
+                _id
+                title
+                company
+                companyWebsite
+                location
+                jobTitle
+                description
+                startDate
+                endDate
+            }
+        }
+    `;
+
+    return axios
+        .post('http://localhost:3000/graphql', { query })
+        .then(({ data: graph }) => graph.data)
+        .then((data) => data.createPortfolio);
+};
 
 const fetchPortfolios = () => {
     const query = `
@@ -28,7 +62,15 @@ const fetchPortfolios = () => {
         .then((data) => data.portfolios);
 };
 
-const Portfolio = ({ portfolios }) => {
+const Portfolio = ({ data }) => {
+    const [portfolios, setPortfolios] = useState(data.portfolios);
+
+    const createPortfolio = async () => {
+        const newPortfolio = await graphCreatePortfolio();
+        const newPortfolios = [...portfolios, newPortfolio];
+        setPortfolios(newPortfolios);
+    };
+
     return (
         <>
             <section className="section-title">
@@ -37,9 +79,15 @@ const Portfolio = ({ portfolios }) => {
                         <h1>Portfolios</h1>
                     </div>
                 </div>
+                <button
+                    className="btn btn-primary mb-3"
+                    onClick={createPortfolio}
+                >
+                    Create Portfolio
+                </button>
             </section>
             <PortfolioCard />
-            <section className="pb-5">
+            <section className="">
                 <div className="row">
                     {portfolios &&
                         portfolios.map((portfolio) => (
@@ -62,7 +110,7 @@ const Portfolio = ({ portfolios }) => {
 
 Portfolio.getInitialProps = async () => {
     const portfolios = await fetchPortfolios();
-    return { portfolios };
+    return { data: { portfolios } };
 };
 
 export default Portfolio;
