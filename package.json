@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/GrafSoul/porty-nextjs-graphql#readme",
   "dependencies": {
+    "@apollo/client": "^3.3.11",
     "apollo-server-express": "^2.21.1",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
