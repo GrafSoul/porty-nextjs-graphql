@@ -1,7 +1,10 @@
 // Core
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // Router
 import Link from 'next/link';
+// Apollo
+import { useLazyQuery } from '@apollo/client';
+import { GET_PORTFOLIOS } from '@/apollo/queries';
 // Axios
 import axios from 'axios';
 // Component
@@ -84,31 +87,23 @@ const graphDeletePortfolio = (id) => {
         .then((data) => data.deletePortfolio);
 };
 
-const fetchPortfolios = () => {
-    const query = `
-        query Portfolios {
-            portfolios {
-                _id
-                title
-                company
-                companyWebsite
-                location
-                jobTitle
-                description
-                startDate
-                endDate
-              }
-        }
-    `;
+const Portfolio = () => {
+    const [portfolios, setPortfolios] = useState([]);
 
-    return axios
-        .post('http://localhost:3000/graphql', { query })
-        .then(({ data: graph }) => graph.data)
-        .then((data) => data.portfolios);
-};
+    const [getPortfolios, { loading, error, data }] = useLazyQuery(
+        GET_PORTFOLIOS,
+    );
 
-const Portfolio = ({ data }) => {
-    const [portfolios, setPortfolios] = useState(data.portfolios);
+    useEffect(() => {
+        getPortfolios();
+    }, []);
+
+    if (data && data.portfolios.length > 0 && portfolios.length === 0) {
+        setPortfolios(data.portfolios);
+    }
+
+    if (loading) return 'Loading...';
+    if (error) return `Error! ${error.message}`;
 
     const createPortfolio = async () => {
         const newPortfolio = await graphCreatePortfolio();
@@ -184,11 +179,6 @@ const Portfolio = ({ data }) => {
             </section>
         </>
     );
-};
-
-Portfolio.getInitialProps = async () => {
-    const portfolios = await fetchPortfolios();
-    return { data: { portfolios } };
 };
 
 export default Portfolio;
