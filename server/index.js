@@ -10,6 +10,8 @@ const dev = process.env.NODE_ENV !== 'production';
 const { portfolioQueries, portfolioMutations } = require('./graphql/resolvers');
 const { portfolioTypes } = require('./graphql/types');
 
+const db = require('./config/dev');
+
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
