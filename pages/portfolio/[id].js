@@ -2,7 +2,7 @@
 import withApollo from '@/hoc/withApollo';
 import { getDataFromTree } from '@apollo/client';
 // Hook
-import useGetPortfolio from '../../hooks/useGetPortfolio';
+import useGetPortfolio from '@/apollo/actions/useGetPortfolio';
 
 const PortfolioDetails = ({ query }) => {
     const { loading, error, portfolio } = useGetPortfolio(query.id);

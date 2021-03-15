@@ -1,58 +1,27 @@
-//HOC
+// Apollo HOC
 import withApollo from '@/hoc/withApollo';
 import { getDataFromTree } from '@apollo/client';
 // Router
 import Link from 'next/link';
-// Apollo
-import { useQuery, useMutation } from '@apollo/client';
-import { GET_PORTFOLIOS } from '@/apollo/queries';
-import { CREATE_PORTFOLIO } from '@/apollo/mutation';
-// Axios
-import axios from 'axios';
+// Hook
+import useGetPortfolios from '@/apollo/actions/useGetPortfolios';
 // Component
 import PortfolioCard from '@/components/PortfolioCard';
 
-const graphUpdatePortfolio = (id) => {
-    return axios
-        .post('http://localhost:3000/graphql', { query })
-        .then(({ data: graph }) => graph.data)
-        .then((data) => data.updatePortfolio);
-};
-
-const graphDeletePortfolio = (id) => {
-    return axios
-        .post('http://localhost:3000/graphql', { query })
-        .then(({ data: graph }) => graph.data)
-        .then((data) => data.deletePortfolio);
-};
-
 const Portfolio = () => {
-    // Get portfolios
-    const { loading, error, data } = useQuery(GET_PORTFOLIOS);
-
-    // Create portfolio
-    const [createPortfolio] = useMutation(CREATE_PORTFOLIO, {
-        update(cache, { data: { createPortfolio } }) {
-            const { portfolios } = cache.readQuery({ query: GET_PORTFOLIOS });
-            cache.writeQuery({
-                query: GET_PORTFOLIOS,
-                data: { portfolios: [...portfolios, createPortfolio] },
-            });
-        },
-    });
+    const {
+        loading,
+        error,
+        data,
+        createPortfolio,
+        updatePortfolio,
+        deletePortfolio,
+    } = useGetPortfolios();
 
     const portfolios = (data && data.portfolios) || [];
 
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
-
-    const updatePortfolio = async (id) => {
-        await graphUpdatePortfolio(id);
-    };
-
-    const deletePortfolio = async (id) => {
-        await graphDeletePortfolio(id);
-    };
 
     return (
         <>
@@ -86,7 +55,9 @@ const Portfolio = () => {
                                 <button
                                     className="btn btn-sm btn-warning ml-2 mt-2"
                                     onClick={() =>
-                                        updatePortfolio(portfolio._id)
+                                        updatePortfolio({
+                                            variables: { id: portfolio._id },
+                                        })
                                     }
                                 >
                                     Update Portfolio
@@ -95,7 +66,9 @@ const Portfolio = () => {
                                 <button
                                     className="btn btn-sm btn-danger ml-2 mt-2"
                                     onClick={() =>
-                                        deletePortfolio(portfolio._id)
+                                        deletePortfolio({
+                                            variables: { id: portfolio._id },
+                                        })
                                     }
                                 >
                                     Delete Portfolio

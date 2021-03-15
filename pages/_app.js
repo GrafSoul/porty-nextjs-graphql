@@ -1,5 +1,3 @@
-//Apollo
-// import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 // Components
 import NavBar from '@/components/NavBar';
 import Hero from '@/components/Hero';
@@ -8,15 +6,9 @@ import Footer from '@/components/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/styles/index.scss';
 
-// const client = new ApolloClient({
-//     uri: 'http://localhost:3000/graphql',
-//     cache: new InMemoryCache(),
-// });
-
 const _App = ({ Component, pageProps }) => {
     const isHomePage = Component.name === 'Home';
     return (
-        // <ApolloProvider client={client}>
         <div className="portfolio-app">
             <NavBar />
             {isHomePage && <Hero />}
@@ -25,7 +17,6 @@ const _App = ({ Component, pageProps }) => {
             </div>
             {isHomePage && <Footer />}
         </div>
-        // </ApolloProvider>
     );
 };
 
