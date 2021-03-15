@@ -1,3 +1,6 @@
+//HOC
+import withApollo from '@/hoc/withApollo';
+import { getDataFromTree } from '@apollo/client';
 // Hook
 import useGetPortfolio from '../../hooks/useGetPortfolio';
 
@@ -58,4 +61,4 @@ PortfolioDetails.getInitialProps = async ({ query }) => {
     return { query };
 };
 
-export default PortfolioDetails;
+export default withApollo(PortfolioDetails, { getDataFromTree });
