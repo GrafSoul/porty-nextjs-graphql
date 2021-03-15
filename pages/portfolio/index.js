@@ -3,71 +3,15 @@ import { useState, useEffect } from 'react';
 // Router
 import Link from 'next/link';
 // Apollo
-import { useLazyQuery } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import { GET_PORTFOLIOS } from '@/apollo/queries';
+import { CREATE_PORTFOLIO } from '@/apollo/mutation';
 // Axios
 import axios from 'axios';
 // Component
 import PortfolioCard from '@/components/PortfolioCard';
 
-const graphCreatePortfolio = () => {
-    const query = `
-        mutation CreatePortfolio {
-            createPortfolio(input: {
-                title: "Work in Uzbekistan"
-                company: "Chorsu LTD Co",
-                companyWebsite: "www.chorsu.com"
-                location: "Uzbekistan, Goparino"
-                jobTitle: "Dvornik"
-                description: "Было все очень плохо"
-                startDate: "01/01/2030"
-                endDate: "01/01/2031"
-            }) {
-                _id
-                title
-                company
-                companyWebsite
-                location
-                jobTitle
-                description
-                startDate
-                endDate
-            }
-        }
-    `;
-
-    return axios
-        .post('http://localhost:3000/graphql', { query })
-        .then(({ data: graph }) => graph.data)
-        .then((data) => data.createPortfolio);
-};
-
 const graphUpdatePortfolio = (id) => {
-    const query = `
-    mutation UpdatePortfolio {
-        updatePortfolio(id: "${id}", input: {   
-            title: "Work in Srakastan"
-            company: "Churki LTD Co",
-            companyWebsite: "www.chorsu.com"
-            location: "Uzbekistan, Goparino"
-            jobTitle: "Dvornik"
-            description: "Было все очень плохо"
-            startDate: "01/01/2030"
-            endDate: "01/01/2031"     
-            }) {
-                _id
-                title
-                company
-                companyWebsite
-                location
-                jobTitle
-                description
-                startDate
-                endDate  
-            }
-        }
-    `;
-
     return axios
         .post('http://localhost:3000/graphql', { query })
         .then(({ data: graph }) => graph.data)
@@ -75,12 +19,6 @@ const graphUpdatePortfolio = (id) => {
 };
 
 const graphDeletePortfolio = (id) => {
-    const query = `
-    mutation DeletePortfolio {
-        deletePortfolio(id: "${id}")
-    }
-    `;
-
     return axios
         .post('http://localhost:3000/graphql', { query })
         .then(({ data: graph }) => graph.data)
@@ -94,22 +32,40 @@ const Portfolio = () => {
         GET_PORTFOLIOS,
     );
 
+    const [createPortfolio] = useMutation(CREATE_PORTFOLIO, {
+        update(cache, { data: { createPortfolio } }) {
+            const { portfolios } = cache.readQuery({ query: GET_PORTFOLIOS });
+            cache.writeQuery({
+                query: GET_PORTFOLIOS,
+                data: { portfolios: [...portfolios, createPortfolio] },
+            });
+        },
+    });
+
+    // const onPortfolioCreated = (dataPortfolio) => {
+    //     setPortfolios([...portfolios, dataPortfolio.createPortfolio]);
+    // };
+
+    // const [
+    //     createPortfolio,
+    //     { data: dataPortfolio },
+    // ] = useMutation(CREATE_PORTFOLIO, { onCompleted: onPortfolioCreated });
+
     useEffect(() => {
         getPortfolios();
     }, []);
 
-    if (data && data.portfolios.length > 0 && portfolios.length === 0) {
+    if (
+        data &&
+        data.portfolios.length > 0 &&
+        (portfolios.length === 0 ||
+            data.portfolios.length !== portfolios.length)
+    ) {
         setPortfolios(data.portfolios);
     }
 
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
-
-    const createPortfolio = async () => {
-        const newPortfolio = await graphCreatePortfolio();
-        const newPortfolios = [...portfolios, newPortfolio];
-        setPortfolios(newPortfolios);
-    };
 
     const updatePortfolio = async (id) => {
         const updatedPortfolio = await graphUpdatePortfolio(id);
