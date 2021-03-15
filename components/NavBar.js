@@ -11,7 +11,7 @@ const NavBar = () => {
                     href="/"
                     className="navbar-brand mr-3 font-weight-bold"
                 >
-                    Porty
+                    VisitCard
                 </AppLink>
 
                 <Navbar.Toggle />

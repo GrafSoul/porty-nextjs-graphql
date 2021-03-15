@@ -1,7 +1,7 @@
 {
-  "name": "porty-nextjs-graphql",
+  "name": "visitcard-nextjs-graphql",
   "version": "0.1.0",
-  "description": "Porty App - (NextJS, Apollo, GraphQL)",
+  "description": "VisitCard App - (NextJS, Apollo, GraphQL)",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server/index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GrafSoul/porty-nextjs-graphql.git"
+    "url": "git+https://github.com/GrafSoul/visitcard-nextjs-graphql.git"
   },
   "keywords": [
     "NextJS",
@@ -21,9 +21,9 @@
   "author": "Dmitriy Zatulovskiy",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/GrafSoul/porty-nextjs-graphql/issues"
+    "url": "https://github.com/GrafSoul/visitcard-nextjs-graphql/issues"
   },
-  "homepage": "https://github.com/GrafSoul/porty-nextjs-graphql#readme",
+  "homepage": "https://github.com/GrafSoul/visitcard-nextjs-graphql#readme",
   "dependencies": {
     "@apollo/client": "^3.3.11",
     "apollo-server-express": "^2.21.1",
