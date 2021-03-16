@@ -1,7 +1,14 @@
 // React Bootstrap
 import { Navbar, Nav } from 'react-bootstrap';
+// Preloader
+import Router from 'next/router';
+import NProgress from 'nprogress';
 // Component
 import AppLink from './AppLink';
+
+Router.events.on('routeChangeStart', () => NProgress.start());
+Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeError', () => NProgress.done());
 
 const NavBar = () => {
     return (
