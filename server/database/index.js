@@ -1,6 +1,8 @@
 // MongoDB
 const mongoose = require('mongoose');
 const config = require('../config/dev');
+// Models
+require('./models/portfolio');
 
 exports.connect = () => {
     mongoose.connect(
