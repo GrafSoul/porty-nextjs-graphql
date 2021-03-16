@@ -3,14 +3,13 @@ const express = require('express');
 const next = require('next');
 // Apollo GraphQL
 const { ApolloServer, gql } = require('apollo-server-express');
+const { portfolioQueries, portfolioMutations } = require('./graphql/resolvers');
+const { portfolioTypes } = require('./graphql/types');
 // Constants
 const PORT = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
-
-const { portfolioQueries, portfolioMutations } = require('./graphql/resolvers');
-const { portfolioTypes } = require('./graphql/types');
-
-const db = require('./config/dev');
+// Database
+require('./database').connect();
 
 const app = next({ dev });
 const handle = app.getRequestHandler();
