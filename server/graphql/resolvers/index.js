@@ -27,11 +27,24 @@ const portfolioMutations = {
     },
 };
 
+const userMutations = {
+    signIn: (root, args, ctx) => {
+        return ctx.models.User.signIn();
+    },
+    signUp: (root, args, ctx) => {
+        return ctx.models.User.signUp();
+    },
+    signOut: (root, args, ctx) => {
+        return ctx.models.User.signOut();
+    },
+};
+
 exports.resolvers = {
     Query: {
         ...portfolioQueries,
     },
     Mutation: {
         ...portfolioMutations,
+        ...userMutations,
     },
 };
