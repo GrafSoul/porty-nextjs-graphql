@@ -32,6 +32,11 @@ const userTypes = `
     password: String!
     passwordConfirmation: String!
   }
+
+  input SignInInput {
+    email: String!
+    password: String!
+  }
 `;
 
 exports.typeDefs = gql`
@@ -49,7 +54,7 @@ exports.typeDefs = gql`
         deletePortfolio(id: ID): ID
 
         signUp(input: SignUpInput): String
-        signIn: String
+        signIn(input: SignInInput): String
         signOut: String
     }
 `;

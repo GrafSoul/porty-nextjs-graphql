@@ -1,4 +1,32 @@
+const mongoose = require('mongoose');
+
+const user1Id = mongoose.Types.ObjectId();
+const user2Id = mongoose.Types.ObjectId();
+
 const data = {
+    users: [
+        {
+            _id: user1Id,
+            avatar:
+                'https://f0.pngfuel.com/png/312/283/man-face-clip-art-png-clip-art-thumbnail.png',
+            email: 'JohnDow@mail.com',
+            name: 'John Dow',
+            username: 'JohnDow',
+            info: 'Hello I am John Dow and I am a developer!',
+            password: '123456',
+            role: 'admin',
+        },
+        {
+            _id: user2Id,
+            avatar:
+                'https://f0.pngfuel.com/png/312/283/man-face-clip-art-png-clip-art-thumbnail.png',
+            email: 'tester@mail.com',
+            name: 'Tester Developer',
+            username: 'Tester',
+            info: 'Hello I am Tester and I am a tester!',
+            password: '123456',
+        },
+    ],
     portfolios: [
         {
             title: 'Job in Netcentric',
@@ -9,6 +37,7 @@ const data = {
             description: 'Doing something, programing....',
             startDate: '01/01/2014',
             endDate: '01/01/2016',
+            user: user1Id,
         },
         {
             title: 'Job in Siemens',
@@ -20,6 +49,7 @@ const data = {
                 'Responsoble for parsing framework for JSON medical data.',
             startDate: '01/01/2011',
             endDate: '01/01/2013',
+            user: user1Id,
         },
         {
             title: 'Work in USA',
@@ -30,6 +60,7 @@ const data = {
             description: 'So much responsibility....Overloaaaaaad',
             startDate: '01/01/2010',
             endDate: '01/01/2011',
+            user: user1Id,
         },
     ],
 };
