@@ -59,7 +59,6 @@ const Meta = () => {
                 href="/static/images/favicon.ico"
                 type="image/x-icon"
             />
-            <link rel="stylesheet" href="/styles/globals.css" />
             <link rel="stylesheet" href="/styles/nprogress.css" />
         </Head>
     );

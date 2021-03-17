@@ -3,11 +3,13 @@ import withApollo from '@/hoc/withApollo';
 import { getDataFromTree } from '@apollo/client';
 // Hook
 import useGetPortfolio from '@/apollo/actions/useGetPortfolio';
+// Component
+import Load from '@/components/Load';
 
 const PortfolioDetails = ({ query }) => {
     const { loading, error, portfolio } = useGetPortfolio(query.id);
 
-    if (loading || !portfolio) return 'Loading...';
+    if (loading || !portfolio) return <Load />;
     if (error) return `Error! ${error.message}`;
 
     return (

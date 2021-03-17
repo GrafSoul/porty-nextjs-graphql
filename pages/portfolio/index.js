@@ -7,6 +7,7 @@ import Link from 'next/link';
 import useGetPortfolios from '@/apollo/actions/useGetPortfolios';
 // Component
 import PortfolioCard from '@/components/PortfolioCard';
+import Load from '@/components/Load';
 
 const Portfolio = () => {
     const {
@@ -20,7 +21,7 @@ const Portfolio = () => {
 
     const portfolios = (data && data.portfolios) || [];
 
-    if (loading) return 'Loading...';
+    if (loading) return <Load />;
     if (error) return `Error! ${error.message}`;
 
     return (
