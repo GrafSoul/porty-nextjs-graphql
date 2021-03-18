@@ -180,6 +180,10 @@ html {
 	background-color:rgba(0,0,0, 0.2)
 }
 
+.button-container {
+	text-align: center;
+}
+
 .btn-main {
 	padding: 16px 24px;
 	color: white;
@@ -253,10 +257,11 @@ html {
 		}
 
 		.hero-title {
+		text-align: center;
 		font-size: 48px;
 		line-height: 56px;
 		font-weight: 500;
-		margin: 0;
+		margin: 0 0 20px;
 		}
 
 		.hero-subtitle {

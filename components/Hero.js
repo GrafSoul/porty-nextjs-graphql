@@ -4,23 +4,14 @@ const Hero = () => {
     return (
         <section className="fj-hero">
             <div className="fj-hero-wrapper row">
-                <div className="hero-left col-md-6">
-                    <h1 className="white hero-title">
-                        Hey I'm Dmitriy. Experienced full stack developer
+                <div className="hero-center col-md-12">
+                    <h1 className="white hero-title center">
+                        Hey I'm Dmitriy. <br />
+                        Experienced full stack developer
                     </h1>
                     <div className="button-container">
                         <a href="" className="btn btn-main bg-blue ttu">
                             See my work
-                        </a>
-                    </div>
-                </div>
-                <div className="hero-right col-md-6">
-                    <div className="hero-image-container">
-                        <a className="grow hero-link">
-                            <img
-                                className="hero-image"
-                                src="https://i.udemycdn.com/course/750x422/1652608_662b_8.jpg"
-                            ></img>
                         </a>
                     </div>
                 </div>

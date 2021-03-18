@@ -14,7 +14,7 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
     const server = express();
 
-    require('./session').init(server, db);
+    require('./middleware/session').init(server, db);
 
     const apolloServer = require('./graphql').createApolloServer();
     apolloServer.applyMiddleware({ app: server });
