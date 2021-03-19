@@ -12,6 +12,7 @@ exports.init = (passport) => {
                 if (!user) {
                     return done(null, false);
                 }
+
                 // TODO: Check user password if its maching password from options
                 // return done(null, user);
                 user.validatePassword(password, (error, isMatching) => {
