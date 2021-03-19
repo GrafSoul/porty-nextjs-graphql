@@ -24,6 +24,15 @@ const portfolioTypes = `
 `;
 
 const userTypes = `
+  type User {
+    _id: ID,
+    avatar: String
+    username: String
+    name: String
+    email: String
+    role: String
+  }
+
   input SignUpInput {
     avatar: String
     username: String!
@@ -54,7 +63,7 @@ exports.typeDefs = gql`
         deletePortfolio(id: ID): ID
 
         signUp(input: SignUpInput): String
-        signIn(input: SignInInput): String
+        signIn(input: SignInInput): User
         signOut: String
     }
 `;
