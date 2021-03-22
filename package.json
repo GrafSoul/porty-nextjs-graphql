@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/GrafSoul/visitcard-nextjs-graphql#readme",
   "dependencies": {
-    "@apollo/client": "^3.3.11",
+    "@apollo/client": "^3.3.12",
     "apollo-server-express": "^2.21.1",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
@@ -44,6 +44,7 @@
     "passport": "^0.4.1",
     "passport-strategy": "^1.0.0",
     "react": "^17.0.1",
+    "react-apollo": "^3.1.5",
     "react-bootstrap": "^1.5.1",
     "react-dom": "^17.0.1",
     "react-hook-form": "^6.15.5",

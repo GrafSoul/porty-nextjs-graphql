@@ -1,8 +1,23 @@
+// Apollo
+import { useMutation } from '@apollo/client';
+import { SIGN_UP } from '@/apollo/mutation';
+import withApollo from '@/hoc/withApollo';
+// Component
 import RegisterForm from '@/components/RegisterForm';
+import Redirect from '@/components/Redirect';
 
-const Register = () => {
+const Register = ({ history }) => {
+    const [signUp, { data, error }] = useMutation(SIGN_UP);
+
     const register = (registerData) => {
-        alert(JSON.stringify(registerData));
+        signUp({
+            variables: {
+                ...registerData,
+            },
+            onCompleted: () => {
+                history.push(`/`);
+            },
+        });
     };
 
     return (
@@ -12,6 +27,7 @@ const Register = () => {
                     <div className="col-md-5 mx-auto">
                         <h1 className="page-title">Register</h1>
                         <RegisterForm onSubmit={register} />
+                        {data && data.signUp && <Redirect to="/login" />}
                     </div>
                 </div>
             </div>
@@ -19,4 +35,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default withApollo(Register);
