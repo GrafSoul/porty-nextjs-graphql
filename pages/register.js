@@ -6,16 +6,20 @@ import withApollo from '@/hoc/withApollo';
 import RegisterForm from '@/components/RegisterForm';
 import Redirect from '@/components/Redirect';
 
-const Register = ({ history }) => {
+const Register = () => {
     const [signUp, { data, error }] = useMutation(SIGN_UP);
 
-    const register = (registerData) => {
+    const errorMessage = (error) => {
+        return (
+            (error.graphQLErrors && error.graphQLErrors[0].message) ||
+            'Ops something went wrong...'
+        );
+    };
+
+    const handleRegister = (registerData) => {
         signUp({
             variables: {
                 ...registerData,
-            },
-            onCompleted: () => {
-                history.push(`/`);
             },
         });
     };
@@ -26,8 +30,13 @@ const Register = ({ history }) => {
                 <div className="row">
                     <div className="col-md-5 mx-auto">
                         <h1 className="page-title">Register</h1>
-                        <RegisterForm onSubmit={register} />
+                        <RegisterForm onSubmit={handleRegister} />
                         {data && data.signUp && <Redirect to="/login" />}
+                        {error && (
+                            <div className="alert alert-danger">
+                                {errorMessage(error)}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
