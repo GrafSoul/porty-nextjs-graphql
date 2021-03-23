@@ -6,7 +6,7 @@ import LoginForm from '@/components/LoginForm';
 import Redirect from '@/components/Redirect';
 
 const Login = () => {
-    const [signIn, { data, error }] = useSignIn();
+    const [signIn, { data, loading, error }] = useSignIn();
 
     const errorMessage = (error) => {
         return (
@@ -22,6 +22,7 @@ const Login = () => {
                     <div className="col-md-5 mx-auto">
                         <h1 className="page-title">Login</h1>
                         <LoginForm
+                            loading={loading}
                             onSubmit={(signInData) =>
                                 signIn({ variables: signInData })
                             }

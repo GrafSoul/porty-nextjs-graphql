@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 //Apollo
 import withApollo from '@/hoc/withApollo';
-import { useGetUser } from '@/apollo/actions/useGetUser';
+import { useLazyGetUser } from '@/apollo/actions/useLazyGetUser';
 // React Bootstrap
 import { Navbar, Nav } from 'react-bootstrap';
 // Preloader
@@ -18,7 +18,7 @@ Router.events.on('routeChangeError', () => NProgress.done());
 const NavBar = () => {
     const [user, setUser] = useState(null);
     const [hasResponse, setHasResponse] = useState(false);
-    const [getUser, { data, error }] = useGetUser();
+    const [getUser, { data, error }] = useLazyGetUser();
 
     useEffect(() => {
         getUser();
@@ -27,10 +27,11 @@ const NavBar = () => {
     if (data) {
         if (data.user && !user) {
             setUser(data.user);
-            setHasResponse(true);
         }
-
-        if (!data.user && !hasResponse) {
+        if (!data.user && user) {
+            setUser(null);
+        }
+        if (!hasResponse) {
             setHasResponse(true);
         }
     }
@@ -70,7 +71,7 @@ const NavBar = () => {
                                         Welcome {user.username}
                                     </span>
                                     <AppLink
-                                        href="/login"
+                                        href="/logout"
                                         className="nav-link btn btn-danger"
                                     >
                                         Sign Out
