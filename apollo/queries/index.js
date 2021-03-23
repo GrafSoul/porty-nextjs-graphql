@@ -31,3 +31,13 @@ export const GET_PORTFOLIOS = gql`
         }
     }
 `;
+
+export const GET_USER = gql`
+    query User {
+        user {
+            _id
+            username
+            role
+        }
+    }
+`;
