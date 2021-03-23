@@ -40,9 +40,16 @@ const userMutations = {
     },
 };
 
+const userQueries = {
+    user: (root, args, ctx) => {
+        return ctx.models.User.getAuthUser(ctx);
+    },
+};
+
 exports.resolvers = {
     Query: {
         ...portfolioQueries,
+        ...userQueries,
     },
     Mutation: {
         ...portfolioMutations,
