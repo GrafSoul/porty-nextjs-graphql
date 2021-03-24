@@ -2,7 +2,7 @@
 import { useSignIn } from '../apollo/actions/useSignIn';
 import withApollo from '@/hoc/withApollo';
 // Component
-import LoginForm from '@/components/LoginForm';
+import LoginForm from '@/components/forms/LoginForm';
 import Redirect from '@/components/Redirect';
 
 const Login = () => {

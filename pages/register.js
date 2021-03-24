@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import { SIGN_UP } from '@/apollo/mutation';
 import withApollo from '@/hoc/withApollo';
 // Component
-import RegisterForm from '@/components/RegisterForm';
+import RegisterForm from '@/components/forms/RegisterForm';
 import Redirect from '@/components/Redirect';
 
 const Register = () => {
