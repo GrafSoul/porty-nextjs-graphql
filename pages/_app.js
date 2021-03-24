@@ -5,6 +5,7 @@ import Hero from '@/components/layout/Hero';
 import Footer from '@/components/layout/Footer';
 // Styles
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-datepicker/dist/react-datepicker.css';
 import '@/styles/index.scss';
 
 const _App = ({ Component, pageProps }) => {
