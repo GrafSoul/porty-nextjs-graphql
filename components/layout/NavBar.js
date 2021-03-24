@@ -9,7 +9,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 // Component
-import AppLink from './AppLink';
+import AppLink from '../helpers/AppLink';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());

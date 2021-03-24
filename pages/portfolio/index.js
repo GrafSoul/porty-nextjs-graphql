@@ -6,8 +6,8 @@ import Link from 'next/link';
 // Hook
 import useGetPortfolios from '@/apollo/actions/useGetPortfolios';
 // Component
-import PortfolioCard from '@/components/PortfolioCard';
-import Load from '@/components/Load';
+import PortfolioCard from '@/components/portfolio/PortfolioCard';
+import Load from '@/components/helpers/Load';
 
 const Portfolio = () => {
     const {

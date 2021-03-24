@@ -1,8 +1,8 @@
 // Components
-import Meta from '@/components/Meta';
-import NavBar from '@/components/NavBar';
-import Hero from '@/components/Hero';
-import Footer from '@/components/Footer';
+import Meta from '@/components/layout/Meta';
+import NavBar from '@/components/layout/NavBar';
+import Hero from '@/components/layout/Hero';
+import Footer from '@/components/layout/Footer';
 // Styles
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/styles/index.scss';

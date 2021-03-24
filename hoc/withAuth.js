@@ -1,5 +1,5 @@
 import { useGetUser } from '@/apollo/actions/useGetUser';
-import Redirect from '@/components/Redirect';
+import Redirect from '@/components/helpers/Redirect';
 
 export default (WrappedComponent, role) => (props) => {
     const { data: { user } = {}, loading, error } = useGetUser({

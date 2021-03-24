@@ -4,7 +4,7 @@ import { getDataFromTree } from '@apollo/client';
 // Hook
 import useGetPortfolio from '@/apollo/actions/useGetPortfolio';
 // Component
-import Load from '@/components/Load';
+import Load from '@/components/helpers/Load';
 
 const PortfolioDetails = ({ query }) => {
     const { loading, error, portfolio } = useGetPortfolio(query.id);

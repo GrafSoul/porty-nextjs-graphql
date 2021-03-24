@@ -4,7 +4,7 @@ import { SIGN_UP } from '@/apollo/mutation';
 import withApollo from '@/hoc/withApollo';
 // Component
 import RegisterForm from '@/components/forms/RegisterForm';
-import Redirect from '@/components/Redirect';
+import Redirect from '@/components/helpers/Redirect';
 
 const Register = () => {
     const [signUp, { data, error }] = useMutation(SIGN_UP);
