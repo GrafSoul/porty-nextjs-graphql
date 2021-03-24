@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import withApollo from '@/hoc/withApollo';
 import { useLazyGetUser } from '@/apollo/actions/useLazyGetUser';
 // React Bootstrap
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 // Preloader
 import Router from 'next/router';
 import NProgress from 'nprogress';
@@ -67,9 +67,34 @@ const NavBar = () => {
                         <Nav>
                             {user && (
                                 <>
-                                    <span className="nav-link mr-4">
+                                    <span className="nav-link mr-2">
                                         Welcome {user.username}
                                     </span>
+                                    <NavDropdown
+                                        className="mr-2"
+                                        title="Manage"
+                                        id="basic-nav-dropdown"
+                                    >
+                                        {(user.role === 'admin' ||
+                                            user.role === 'admin') && (
+                                            <AppLink
+                                                href="/portfolios/new"
+                                                className="dropdown-item"
+                                            >
+                                                Create Portfolio
+                                            </AppLink>
+                                        )}
+                                        <NavDropdown.Item href="#action/3.2">
+                                            Another action
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/3.3">
+                                            Something
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item href="#action/3.4">
+                                            Separated link
+                                        </NavDropdown.Item>
+                                    </NavDropdown>
                                     <AppLink
                                         href="/logout"
                                         className="nav-link btn btn-danger"

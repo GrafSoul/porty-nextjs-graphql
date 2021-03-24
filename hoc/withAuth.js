@@ -12,7 +12,7 @@ export default (WrappedComponent, role) => (props) => {
 
     //  TODO: Send a message to login page
     if (user) {
-        if (role && user.role !== role) {
+        if (role && !role.includes(user.role)) {
             return <Redirect to="/" />;
         }
         return <WrappedComponent {...props} />;

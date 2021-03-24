@@ -19,4 +19,4 @@ const PortfolioNew = () => {
     );
 };
 
-export default withApollo(withAuth(PortfolioNew, 'admin'));
+export default withApollo(withAuth(PortfolioNew, ['admin', 'instructor']));
