@@ -1,10 +1,24 @@
+//Core
+import { useEffect, useState } from 'react';
 // Hook Form
 import { useForm } from 'react-hook-form';
 // Datepicker
 import DatePicker from 'react-datepicker';
 
 const PortfolioForm = ({ onSubmit }) => {
-    const { handleSubmit, register } = useForm();
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+    const { handleSubmit, register, setValue } = useForm();
+
+    useEffect(() => {
+        register({ name: 'startDate' });
+        register({ name: 'endDate' });
+    }, [register]);
+
+    const handleDateChange = (dateType, setDate) => (date) => {
+        setValue(dateType, date.toISOString());
+        setDate(date);
+    };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -65,37 +79,23 @@ const PortfolioForm = ({ onSubmit }) => {
             </div>
 
             <div className="form-group">
-                <label htmlFor="street">Start Date</label>
-                {/* <input
-                    ref={register}
-                    name="startDate"
-                    type="text"
-                    className="form-control"
-                    id="startDate"
-                /> */}
+                <label htmlFor="startDate">Start Date</label>
                 <div>
                     <DatePicker
                         showYearDropdown
-                        selected={new Date()}
-                        onChange={() => {}}
+                        selected={startDate}
+                        onChange={handleDateChange('startDate', setStartDate)}
                     />
                 </div>
             </div>
 
             <div className="form-group">
-                <label htmlFor="street">End Date</label>
-                {/* <input
-                    ref={register}
-                    name="endDate"
-                    type="text"
-                    className="form-control"
-                    id="endDate"
-                /> */}
+                <label htmlFor="endDate">End Date</label>
                 <div>
                     <DatePicker
                         showYearDropdown
-                        selected={new Date()}
-                        onChange={() => {}}
+                        selected={endDate}
+                        onChange={handleDateChange('endDate', setEndDate)}
                     />
                 </div>
             </div>
