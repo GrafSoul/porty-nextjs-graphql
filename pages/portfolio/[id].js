@@ -5,6 +5,7 @@ import { getDataFromTree } from '@apollo/client';
 import useGetPortfolio from '@/apollo/actions/useGetPortfolio';
 // Component
 import Load from '@/components/helpers/Load';
+import BaseLayout from '@/layouts/BaseLayout';
 
 const PortfolioDetails = ({ query }) => {
     const { loading, error, portfolio } = useGetPortfolio(query.id);
@@ -13,7 +14,7 @@ const PortfolioDetails = ({ query }) => {
     if (error) return `Error! ${error.message}`;
 
     return (
-        <>
+        <BaseLayout>
             <div className="portfolio-detail">
                 <div className="container">
                     <div className="jumbotron">
@@ -55,7 +56,7 @@ const PortfolioDetails = ({ query }) => {
                     </div>
                 </div>
             </div>
-        </>
+        </BaseLayout>
     );
 };
 

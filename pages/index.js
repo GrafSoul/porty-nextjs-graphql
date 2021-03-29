@@ -1,5 +1,8 @@
+// Components
+import BaseLayout from '@/layouts/BaseLayout';
+
 const Home = () => (
-    <>
+    <BaseLayout>
         <section className="section-title">
             <div className="px-2">
                 <div className="pt-5 pb-4">
@@ -191,7 +194,7 @@ const Home = () => (
                 </div>
             </div>
         </div>
-    </>
+    </BaseLayout>
 );
 
 export default Home;

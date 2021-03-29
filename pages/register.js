@@ -5,6 +5,7 @@ import withApollo from '@/hoc/withApollo';
 // Component
 import RegisterForm from '@/components/forms/RegisterForm';
 import Redirect from '@/components/helpers/Redirect';
+import BaseLayout from '@/layouts/BaseLayout';
 
 const Register = () => {
     const [signUp, { data, error }] = useMutation(SIGN_UP);
@@ -25,7 +26,7 @@ const Register = () => {
     };
 
     return (
-        <>
+        <BaseLayout>
             <div className="bwm-form mt-5">
                 <div className="row">
                     <div className="col-md-5 mx-auto">
@@ -40,7 +41,7 @@ const Register = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </BaseLayout>
     );
 };
 

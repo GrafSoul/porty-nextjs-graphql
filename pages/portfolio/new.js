@@ -7,6 +7,7 @@ import useGetPortfolios from '@/apollo/actions/useGetPortfolios';
 import { useRouter } from 'next/router';
 // Components
 import PortfolioForm from '@/components/forms/PortfolioForm';
+import BaseLayout from '@/layouts/BaseLayout';
 
 const PortfolioNew = () => {
     const { createPortfolio, error } = useGetPortfolios();
@@ -24,7 +25,7 @@ const PortfolioNew = () => {
         router.push('/portfolio');
     };
     return (
-        <>
+        <BaseLayout>
             <div className="bwm-form mt-5">
                 <div className="row">
                     <div className="col-md-5 mx-auto">
@@ -38,7 +39,7 @@ const PortfolioNew = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </BaseLayout>
     );
 };
 

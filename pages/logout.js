@@ -1,7 +1,12 @@
+// Core
 import { useEffect } from 'react';
+// Router
 import { useRouter } from 'next/router';
+// Hoc
 import withApollo from '@/hoc/withApollo';
 import { useSignOut } from '@/apollo/actions/useSignOut';
+// Components
+import BaseLayout from '@/layouts/BaseLayout';
 
 const Logout = ({ apollo }) => {
     const [signOut] = useSignOut();
@@ -14,7 +19,7 @@ const Logout = ({ apollo }) => {
     }, []);
 
     return (
-        <>
+        <BaseLayout>
             <div className="bwm-form mt-5">
                 <div className="row">
                     <div className="col-md-5 mx-auto">
@@ -23,7 +28,7 @@ const Logout = ({ apollo }) => {
                     </div>
                 </div>
             </div>
-        </>
+        </BaseLayout>
     );
 };
 

@@ -1,6 +1,9 @@
+// Component
+import BaseLayout from '@/layouts/BaseLayout';
+
 const Posts = () => {
     return (
-        <>
+        <BaseLayout>
             <div className="container">
                 <section className="section-title">
                     <div className="px-2">
@@ -207,7 +210,7 @@ const Posts = () => {
                 </section>
                 {/* POSTS PAGE ENDS */}
             </div>
-        </>
+        </BaseLayout>
     );
 };
 

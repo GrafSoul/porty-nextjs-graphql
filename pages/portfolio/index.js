@@ -6,6 +6,7 @@ import Link from 'next/link';
 // Hook
 import useGetPortfolios from '@/apollo/actions/useGetPortfolios';
 // Component
+import BaseLayout from '@/layouts/BaseLayout';
 import PortfolioCard from '@/components/portfolio/PortfolioCard';
 import Load from '@/components/helpers/Load';
 
@@ -18,7 +19,7 @@ const Portfolio = () => {
     if (error) return `Error! ${error.message}`;
 
     return (
-        <>
+        <BaseLayout>
             <section className="section-title">
                 <div className="px-2">
                     <div className="pt-5 pb-4">
@@ -44,7 +45,7 @@ const Portfolio = () => {
                         ))}
                 </div>
             </section>
-        </>
+        </BaseLayout>
     );
 };
 
