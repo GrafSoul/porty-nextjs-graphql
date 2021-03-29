@@ -1,17 +1,26 @@
 import { gql } from '@apollo/client';
 
 export const CREATE_PORTFOLIO = gql`
-    mutation CreatePortfolio {
+    mutation CreatePortfolio(
+        $title: String
+        $company: String
+        $companyWebsite: String
+        $location: String
+        $jobTitle: String
+        $description: String
+        $startDate: String
+        $endDate: String
+    ) {
         createPortfolio(
             input: {
-                title: "Work in Uzbekistan"
-                company: "Chorsu LTD Co"
-                companyWebsite: "www.chorsu.com"
-                location: "Uzbekistan, Goparino"
-                jobTitle: "Dvornik"
-                description: "Было все очень плохо"
-                startDate: "01/01/2030"
-                endDate: "01/01/2031"
+                title: $title
+                company: $company
+                companyWebsite: $companyWebsite
+                location: $location
+                jobTitle: $jobTitle
+                description: $description
+                startDate: $startDate
+                endDate: $endDate
             }
         ) {
             _id

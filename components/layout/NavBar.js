@@ -78,7 +78,7 @@ const NavBar = () => {
                                         {(user.role === 'admin' ||
                                             user.role === 'admin') && (
                                             <AppLink
-                                                href="/portfolios/new"
+                                                href="/portfolio/new"
                                                 className="dropdown-item"
                                             >
                                                 Create Portfolio

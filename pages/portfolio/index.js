@@ -10,14 +10,7 @@ import PortfolioCard from '@/components/portfolio/PortfolioCard';
 import Load from '@/components/helpers/Load';
 
 const Portfolio = () => {
-    const {
-        loading,
-        error,
-        data,
-        createPortfolio,
-        updatePortfolio,
-        deletePortfolio,
-    } = useGetPortfolios();
+    const { loading, error, data } = useGetPortfolios();
 
     const portfolios = (data && data.portfolios) || [];
 
@@ -32,12 +25,6 @@ const Portfolio = () => {
                         <h1>Portfolios</h1>
                     </div>
                 </div>
-                <button
-                    className="btn btn-primary mb-3"
-                    onClick={createPortfolio}
-                >
-                    Create Portfolio
-                </button>
             </section>
             <PortfolioCard />
             <section className="">
@@ -53,27 +40,6 @@ const Portfolio = () => {
                                         <PortfolioCard portfolio={portfolio} />
                                     </a>
                                 </Link>
-                                <button
-                                    className="btn btn-sm btn-warning ml-2 mt-2"
-                                    onClick={() =>
-                                        updatePortfolio({
-                                            variables: { id: portfolio._id },
-                                        })
-                                    }
-                                >
-                                    Update Portfolio
-                                </button>
-
-                                <button
-                                    className="btn btn-sm btn-danger ml-2 mt-2"
-                                    onClick={() =>
-                                        deletePortfolio({
-                                            variables: { id: portfolio._id },
-                                        })
-                                    }
-                                >
-                                    Delete Portfolio
-                                </button>
                             </div>
                         ))}
                 </div>
