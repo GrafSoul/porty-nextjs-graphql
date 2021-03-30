@@ -41,3 +41,15 @@ export const GET_USER = gql`
         }
     }
 `;
+
+export const GET_USER_PORTFOLIOS = gql`
+    query UserPortfolios {
+        userPortfolios {
+            _id
+            title
+            jobTitle
+            startDate
+            endDate
+        }
+    }
+`;
