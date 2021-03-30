@@ -44,4 +44,3 @@ const PortfolioNew = () => {
 };
 
 export default withApollo(withAuth(PortfolioNew, ['admin', 'instructor']));
-// export default withApollo(PortfolioNew);
