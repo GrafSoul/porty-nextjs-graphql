@@ -1,6 +1,6 @@
 // Apollo
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_PORTFOLIOS } from '@/apollo/queries';
+import { GET_PORTFOLIOS, GET_USER_PORTFOLIOS } from '@/apollo/queries';
 import {
     CREATE_PORTFOLIO,
     UPDATE_PORTFOLIO,
@@ -28,13 +28,15 @@ const useGetPortfolios = () => {
     // Delete Portfolio
     const [deletePortfolio] = useMutation(DELETE_PORTFOLIO, {
         update(cache, { data: { deletePortfolio } }) {
-            const { portfolios } = cache.readQuery({ query: GET_PORTFOLIOS });
-            const newPortfolios = portfolios.filter(
-                (item) => item._id !== deletePortfolio,
+            const { userPortfolios } = cache.readQuery({
+                query: GET_USER_PORTFOLIOS,
+            });
+            const newPortfolios = userPortfolios.filter(
+                (p) => p._id !== deletePortfolio,
             );
             cache.writeQuery({
-                query: GET_PORTFOLIOS,
-                data: { portfolios: newPortfolios },
+                query: GET_USER_PORTFOLIOS,
+                data: { userPortfolios: newPortfolios },
             });
         },
     });

@@ -1,6 +1,7 @@
 // Apollo
 import { getDataFromTree } from '@apollo/client/react/ssr';
 import useGetUserPortfolios from '../../../apollo/actions/useGetUserPortfolios';
+import useGetPortfolios from '../../../apollo/actions/useGetPortfolios';
 // Router
 import Link from 'next/link';
 // Hoc
@@ -14,6 +15,7 @@ import { Card, Button } from 'react-bootstrap';
 
 const InstructorDashboard = withAuth(() => {
     const { loading, error, portfolios } = useGetUserPortfolios();
+    const { deletePortfolio } = useGetPortfolios();
 
     if (loading) return <Load />;
     if (error) return `Error! ${error.message}`;
@@ -43,7 +45,11 @@ const InstructorDashboard = withAuth(() => {
                                             </a>
                                         </Link>
                                         <Button
-                                            onClick={() => alert('Deleting')}
+                                            onClick={() =>
+                                                deletePortfolio({
+                                                    variables: { id: p._id },
+                                                })
+                                            }
                                             variant="danger"
                                         >
                                             Delete
