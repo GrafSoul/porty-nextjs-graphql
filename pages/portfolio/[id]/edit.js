@@ -1,18 +1,32 @@
+// Apollo
+import useGetPortfolio from '@/apollo/actions/useGetPortfolio';
 // Components
 import PortfolioForm from '@/components/forms/PortfolioForm';
 // Hoc
 import withApollo from '@/hoc/withApollo';
 import withAuth from '@/hoc/withAuth';
 import BaseLayout from '@/layouts/BaseLayout';
+// Router
+import { useRouter } from 'next/router';
 
 const PortfolioEdit = () => {
+    const router = useRouter();
+    const { id } = router.query;
+
+    const { portfolio } = useGetPortfolio(id);
+
     return (
         <BaseLayout>
             <div className="bwm-form mt-5">
                 <div className="row">
                     <div className="col-md-5 mx-auto">
                         <h1 className="page-title">Edit Portfolio</h1>
-                        <PortfolioForm onSubmit={() => {}} />
+                        {portfolio && (
+                            <PortfolioForm
+                                initialData={portfolio}
+                                onSubmit={() => {}}
+                            />
+                        )}
                     </div>
                 </div>
             </div>
