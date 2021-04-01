@@ -10,11 +10,10 @@ import withAuth from '@/hoc/withAuth';
 import BaseLayout from '@/layouts/BaseLayout';
 // Router
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 
 const PortfolioEdit = () => {
     const router = useRouter();
-    const { updatePortfolio, error } = useGetPortfolios();
+    const { updatePortfolio, loading, error } = useGetPortfolios();
     const { id } = router.query;
     const { portfolio } = useGetPortfolio(id);
 
@@ -26,11 +25,14 @@ const PortfolioEdit = () => {
     };
 
     const handleSubmit = (data) => {
-        console.log(data);
         updatePortfolio({
             variables: { id, ...data },
         });
+        router.back();
     };
+
+    if (loading || !portfolio) return <Load />;
+    if (error) return `Error! ${error.message}`;
 
     return (
         <BaseLayout>

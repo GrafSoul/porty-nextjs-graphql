@@ -10,7 +10,6 @@ export const GET_PORTFOLIO = gql`
             location
             jobTitle
             description
-            user
             startDate
             endDate
         }

@@ -8,7 +8,6 @@ const portfolioFields = `
     location: String,
     jobTitle: String,
     description: String,
-    user: String,
     startDate: String,
     endDate: String
 `;

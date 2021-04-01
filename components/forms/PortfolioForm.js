@@ -8,6 +8,7 @@ import DatePicker from 'react-datepicker';
 const PortfolioForm = ({ onSubmit, initialData = {} }) => {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
+
     const { handleSubmit, register, setValue } = useForm({
         defaultValues: initialData,
     });
@@ -43,6 +44,7 @@ const PortfolioForm = ({ onSubmit, initialData = {} }) => {
                 <label htmlFor="title">Title</label>
                 <input
                     ref={register}
+                    defaultValue={initialData.title}
                     name="title"
                     type="text"
                     className="form-control"
@@ -51,9 +53,10 @@ const PortfolioForm = ({ onSubmit, initialData = {} }) => {
             </div>
 
             <div className="form-group">
-                <label htmlFor="city">Company</label>
+                <label htmlFor="company">Company</label>
                 <input
                     ref={register}
+                    defaultValue={initialData.company}
                     name="company"
                     type="text"
                     className="form-control"
@@ -62,9 +65,10 @@ const PortfolioForm = ({ onSubmit, initialData = {} }) => {
             </div>
 
             <div className="form-group">
-                <label htmlFor="city">Company Website</label>
+                <label htmlFor="companyWebsite">Company Website</label>
                 <input
                     ref={register}
+                    defaultValue={initialData.companyWebsite}
                     name="companyWebsite"
                     type="text"
                     className="form-control"
@@ -73,9 +77,10 @@ const PortfolioForm = ({ onSubmit, initialData = {} }) => {
             </div>
 
             <div className="form-group">
-                <label htmlFor="street">Location</label>
+                <label htmlFor="location">Location</label>
                 <input
                     ref={register}
+                    defaultValue={initialData.location}
                     name="location"
                     type="text"
                     className="form-control"
@@ -84,9 +89,10 @@ const PortfolioForm = ({ onSubmit, initialData = {} }) => {
             </div>
 
             <div className="form-group">
-                <label htmlFor="street">Job Title</label>
+                <label htmlFor="jobTitle">Job Title</label>
                 <input
                     ref={register}
+                    defaultValue={initialData.jobTitle}
                     name="jobTitle"
                     type="text"
                     className="form-control"
@@ -98,6 +104,7 @@ const PortfolioForm = ({ onSubmit, initialData = {} }) => {
                 <label htmlFor="description">Description</label>
                 <textarea
                     ref={register}
+                    defaultValue={initialData.description}
                     name="description"
                     rows="5"
                     type="text"

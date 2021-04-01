@@ -35,7 +35,6 @@ const InstructorDashboard = withAuth(() => {
                                         <Card.Text>
                                             {p.startDate} - {p.endDate}
                                         </Card.Text>
-                                        {/* TODO: Delete Update Buttons */}
                                         <Link
                                             href="/portfolio/[id]/edit"
                                             as={`/portfolio/${p._id}/edit`}
