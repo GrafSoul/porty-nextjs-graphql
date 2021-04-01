@@ -28,7 +28,10 @@ class Portfolio {
     }
 
     updateById(id, data) {
-        return this.Model.findByIdAndUpdate({ _id: id }, data, { new: true });
+        return this.Model.findByIdAndUpdate({ _id: id }, data, {
+            new: true,
+            runValidators: true,
+        });
     }
 
     deleteById(id) {

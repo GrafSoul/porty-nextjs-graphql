@@ -37,18 +37,28 @@ export const CREATE_PORTFOLIO = gql`
 `;
 
 export const UPDATE_PORTFOLIO = gql`
-    mutation UpdatePortfolio($id: ID) {
+    mutation UpdatePortfolio(
+        $id: ID
+        $title: String
+        $company: String
+        $companyWebsite: String
+        $location: String
+        $jobTitle: String
+        $description: String
+        $startDate: String
+        $endDate: String
+    ) {
         updatePortfolio(
             id: $id
             input: {
-                title: "Work in Srakastan"
-                company: "Churki LTD Co"
-                companyWebsite: "www.chorsu.com"
-                location: "Uzbekistan, Goparino"
-                jobTitle: "Dvornik"
-                description: "Было все очень плохо"
-                startDate: "01/01/2030"
-                endDate: "01/01/2031"
+                title: $title
+                company: $company
+                companyWebsite: $companyWebsite
+                location: $location
+                jobTitle: $jobTitle
+                description: $description
+                startDate: $startDate
+                endDate: $endDate
             }
         ) {
             _id
