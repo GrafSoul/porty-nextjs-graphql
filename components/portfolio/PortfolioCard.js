@@ -1,3 +1,6 @@
+// Date utils
+import { formatDate } from '@/utils/date';
+
 const PortfolioCard = ({ portfolio }) => {
     return (
         <>
@@ -14,7 +17,10 @@ const PortfolioCard = ({ portfolio }) => {
                     </div>
                     <div className="card-footer no-border">
                         <small className="text-muted">
-                            {portfolio.startDate} - {portfolio.endDate}
+                            {formatDate(portfolio.startDate)} -{' '}
+                            {(portfolio.endDate &&
+                                formatDate(portfolio.endDate)) ||
+                                'Present'}
                         </small>
                     </div>
                 </div>

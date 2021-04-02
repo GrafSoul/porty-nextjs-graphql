@@ -7,6 +7,8 @@ import Link from 'next/link';
 // Hoc
 import withApollo from '@/hoc/withApollo';
 import withAuth from '@/hoc/withAuth';
+// Date utils
+import { formatDate } from '@/utils/date';
 // Components
 import BaseLayout from '@/layouts/BaseLayout';
 import Load from '@/components/helpers/Load';
@@ -33,7 +35,10 @@ const InstructorDashboard = withAuth(() => {
                                     <Card.Body>
                                         <Card.Title>{p.title}</Card.Title>
                                         <Card.Text>
-                                            {p.startDate} - {p.endDate}
+                                            {formatDate(p.startDate)} -{' '}
+                                            {(p.endDate &&
+                                                formatDate(p.endDate)) ||
+                                                'Present'}
                                         </Card.Text>
                                         <Link
                                             href="/portfolio/[id]/edit"
