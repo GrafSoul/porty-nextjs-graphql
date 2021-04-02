@@ -8,13 +8,23 @@ export default (WrappedComponent, role, options = { ssr: false }) => {
         });
 
         if (!loading && (!user || error) && typeof window !== 'undefined') {
-            return <Redirect to="/login" />;
+            return (
+                <Redirect
+                    to="/login"
+                    query={{ message: 'NOT_AUTHENTICATED' }}
+                />
+            );
         }
 
         // TODO: Send a message to login page
         if (user) {
             if (role && !role.includes(user.role)) {
-                return <Redirect to="/login" />;
+                return (
+                    <Redirect
+                        to="/login"
+                        query={{ message: 'NOT_AUTHORIZED' }}
+                    />
+                );
             }
             return <WrappedComponent {...props} />;
         }
@@ -35,11 +45,14 @@ export default (WrappedComponent, role, options = { ssr: false }) => {
                 const { user } = req;
 
                 if (!user) {
-                    return serverRedirect(res, '/login');
+                    return serverRedirect(
+                        res,
+                        '/login?message=NOT_AUTHENTICATED',
+                    );
                 }
 
                 if (role && !role.includes(user.role)) {
-                    return serverRedirect(res, '/login');
+                    return serverRedirect(res, '/login?message=NOT_AUTHORIZED');
                 }
             }
 

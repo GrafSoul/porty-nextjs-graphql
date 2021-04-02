@@ -32,7 +32,12 @@ const Register = () => {
                     <div className="col-md-5 mx-auto">
                         <h1 className="page-title">Register</h1>
                         <RegisterForm onSubmit={handleRegister} />
-                        {data && data.signUp && <Redirect to="/login" />}
+                        {data && data.signUp && (
+                            <Redirect
+                                to="/login"
+                                query={{ message: 'LOGGED_IN' }}
+                            />
+                        )}
                         {error && (
                             <div className="alert alert-danger">
                                 {errorMessage(error)}
