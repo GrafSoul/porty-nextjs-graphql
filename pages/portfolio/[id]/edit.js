@@ -1,7 +1,8 @@
 // Apollo
 import useGetPortfolio from '@/apollo/actions/useGetPortfolio';
 import useGetPortfolios from '@/apollo/actions/useGetPortfolios';
-
+// Toast
+import { toast } from 'react-toastify';
 // Components
 import PortfolioForm from '@/components/forms/PortfolioForm';
 // Hoc
@@ -24,11 +25,12 @@ const PortfolioEdit = () => {
         );
     };
 
-    const handleSubmit = (data) => {
-        updatePortfolio({
-            variables: { id, ...data },
-        });
-        router.back();
+    const handlePortfolioUpdate = async (data) => {
+        await updatePortfolio({ variables: { id, ...data } });
+        toast.success('Portfolio has been updated!', { autoClose: 2000 });
+        setTimeout(() => {
+            router.back();
+        }, 3000);
     };
 
     if (loading || !portfolio) return <Load />;
@@ -43,7 +45,7 @@ const PortfolioEdit = () => {
                         {portfolio && (
                             <PortfolioForm
                                 initialData={portfolio}
-                                onSubmit={(data) => handleSubmit(data)}
+                                onSubmit={handlePortfolioUpdate}
                             />
                         )}
                         {error && (
