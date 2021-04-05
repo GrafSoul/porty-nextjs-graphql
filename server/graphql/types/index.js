@@ -49,9 +49,19 @@ const userTypes = `
   }
 `;
 
+const forumTypes = `
+  type ForumCategory {
+    _id: ID
+    title: String
+    subTitle: String
+    slug: String
+  }
+`;
+
 exports.typeDefs = gql`
     ${portfolioTypes}
     ${userTypes}
+    ${forumTypes}
 
     type Query {
         portfolio(id: ID): Portfolio
@@ -59,6 +69,8 @@ exports.typeDefs = gql`
         userPortfolios: [Portfolio]
 
         user: User
+
+        forumCategories: [ForumCategory]
     }
 
     type Mutation {

@@ -6,6 +6,7 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 // Models
 require('./models/portfolio');
 require('./models/user');
+require('./models/forumCategory');
 
 exports.connect = () => {
     mongoose.connect(

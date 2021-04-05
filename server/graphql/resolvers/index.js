@@ -49,10 +49,17 @@ const userQueries = {
     },
 };
 
+const forumQueries = {
+    forumCategories: (root, args, ctx) => {
+        return ctx.models.ForumCategory.getAll();
+    },
+};
+
 exports.resolvers = {
     Query: {
         ...portfolioQueries,
         ...userQueries,
+        ...forumQueries,
     },
     Mutation: {
         ...portfolioMutations,
