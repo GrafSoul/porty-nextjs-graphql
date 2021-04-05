@@ -35,7 +35,7 @@ const NavBar = () => {
             setHasResponse(true);
         }
     }
-
+    
     return (
         <div className="navbar-wrapper">
             <Navbar expand="lg" className="navbar-dark fj-mw9">
@@ -69,6 +69,13 @@ const NavBar = () => {
                                 <>
                                     <span className="nav-link mr-2">
                                         Welcome {user.username}
+                                    </span>
+                                    <span className="nav-link mr-2">
+                                        <img
+                                            className="avatar"
+                                            src={user.avatar}
+                                            alt={user.info}
+                                        />
                                     </span>
 
                                     {(user.role === 'admin' ||

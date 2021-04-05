@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 
 const user1Id = mongoose.Types.ObjectId();
 const user2Id = mongoose.Types.ObjectId();
+const user3Id = mongoose.Types.ObjectId();
+
+const forum1Id = mongoose.Types.ObjectId();
+const forum2Id = mongoose.Types.ObjectId();
+const forum3Id = mongoose.Types.ObjectId();
 
 const data = {
     users: [
@@ -9,22 +14,34 @@ const data = {
             _id: user1Id,
             avatar:
                 'https://f0.pngfuel.com/png/312/283/man-face-clip-art-png-clip-art-thumbnail.png',
-            email: 'JohnDow@mail.com',
-            name: 'John Dow',
-            username: 'JohnDow',
-            info: 'Hello I am John Dow and I am a developer!',
-            password: '123456',
+            email: 'admin@mail.com',
+            name: 'Admin Developer',
+            username: 'Administrator',
+            info: 'Hello I am Admin and I am a admin!',
+            password: '111111',
             role: 'admin',
         },
         {
             _id: user2Id,
             avatar:
                 'https://f0.pngfuel.com/png/312/283/man-face-clip-art-png-clip-art-thumbnail.png',
-            email: 'tester@mail.com',
-            name: 'Tester Developer',
-            username: 'Tester',
-            info: 'Hello I am Tester and I am a tester!',
-            password: '123456',
+            email: 'instructor@mail.com',
+            name: 'Instructor Developer',
+            username: 'Instructor',
+            info: 'Hello I am Instructor and I am a instructor!',
+            password: '111111',
+            role: 'instructor',
+        },
+        {
+            _id: user3Id,
+            avatar:
+                'https://f0.pngfuel.com/png/312/283/man-face-clip-art-png-clip-art-thumbnail.png',
+            email: 'guest@mail.com',
+            name: 'Visitor Developer',
+            username: 'Visitor',
+            info: 'Hello I am Visitor and I am a guest!',
+            password: '111111',
+            role: 'guest',
         },
     ],
     portfolios: [
@@ -61,6 +78,26 @@ const data = {
             startDate: '01/01/2010',
             endDate: '01/01/2011',
             user: user1Id,
+        },
+    ],
+    forumCategories: [
+        {
+            _id: forum1Id,
+            title: 'General Discussion',
+            subTitle: 'Open any topic you want',
+            slug: 'general-discussion',
+        },
+        {
+            _id: forum2Id,
+            title: 'Job Requests',
+            subTitle: 'Post here job opportunities',
+            slug: 'job-requests',
+        },
+        {
+            _id: forum3Id,
+            title: 'Developer Jokes',
+            subTitle: 'Just funny developing stuff',
+            slug: 'developer-jokes',
         },
     ],
 };

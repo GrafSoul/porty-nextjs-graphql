@@ -30,6 +30,7 @@ const userTypes = `
     username: String
     name: String
     email: String
+    info: String
     role: String
   }
 

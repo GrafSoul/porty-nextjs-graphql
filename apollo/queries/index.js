@@ -37,7 +37,9 @@ export const GET_USER = gql`
     query User {
         user {
             _id
+            avatar
             username
+            info
             role
         }
     }
