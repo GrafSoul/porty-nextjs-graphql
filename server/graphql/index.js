@@ -8,6 +8,7 @@ const { resolvers } = require('./resolvers');
 const Portfolio = require('./models/Portfolio');
 const User = require('./models/User');
 const ForumCategory = require('./models/ForumCategory');
+const Topic = require('./models/Topic');
 // AuthContext
 const { buildAuthContext } = require('./context');
 
@@ -23,6 +24,7 @@ exports.createApolloServer = () => {
                 ForumCategory: new ForumCategory(
                     mongoose.model('ForumCategory'),
                 ),
+                Topic: new Topic(mongoose.model('Topic')),
             },
         }),
     });
