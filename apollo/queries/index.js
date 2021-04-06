@@ -56,3 +56,13 @@ export const GET_USER_PORTFOLIOS = gql`
         }
     }
 `;
+
+export const FORUM_CATEGORIES = gql`
+    query ForumCategories {
+        forumCategories {
+            slug
+            title
+            subTitle
+        }
+    }
+`;
