@@ -71,6 +71,12 @@ const forumTypes = `
     user: Author
     createdAt: String
   }
+
+  input TopicInput {
+    title: String
+    content: String
+    forumCategory: String
+  }
 `;
 
 exports.typeDefs = gql`
@@ -94,6 +100,8 @@ exports.typeDefs = gql`
         createPortfolio(input: PortfolioInput): Portfolio
         updatePortfolio(id: ID, input: PortfolioInput): Portfolio
         deletePortfolio(id: ID): ID
+
+        createTopic(input: TopicInput): Topic
 
         signUp(input: SignUpInput): String
         signIn(input: SignInInput): User

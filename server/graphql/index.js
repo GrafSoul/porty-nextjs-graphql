@@ -24,7 +24,7 @@ exports.createApolloServer = () => {
                 ForumCategory: new ForumCategory(
                     mongoose.model('ForumCategory'),
                 ),
-                Topic: new Topic(mongoose.model('Topic')),
+                Topic: new Topic(mongoose.model('Topic'), req.user),
             },
         }),
     });

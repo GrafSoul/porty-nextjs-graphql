@@ -65,6 +65,13 @@ const forumQueries = {
     },
 };
 
+const forumMutations = {
+    createTopic: async (root, { input }, ctx) => {
+        const topic = await ctx.models.Topic.create(input);
+        return topic;
+    },
+};
+
 exports.resolvers = {
     Query: {
         ...portfolioQueries,
@@ -74,5 +81,6 @@ exports.resolvers = {
     Mutation: {
         ...portfolioMutations,
         ...userMutations,
+        ...forumMutations,
     },
 };
