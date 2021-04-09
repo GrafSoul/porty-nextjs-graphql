@@ -1,20 +1,35 @@
+// Core
+import { useState } from 'react';
 // Apollo
 import { useQuery } from '@apollo/client';
 import { TOPICS_BY_CATEGORY } from '@/apollo/queries';
 import withApollo from '@/hoc/withApollo';
 import { getDataFromTree } from '@apollo/client/react/ssr';
+import useGetUser from '@/apollo/actions/useGetUser';
 // Router
 import { useRouter } from 'next/router';
 // Component
 import BaseLayout from '@/layouts/BaseLayout';
+import Replier from '@/components/helpers/Replier';
 
-const Topics = () => {
+const useInitialData = () => {
     const useGetTopicsByCategory = (options) =>
         useQuery(TOPICS_BY_CATEGORY, options);
     const router = useRouter();
     const { slug } = router.query;
-    const { data } = useGetTopicsByCategory({ variables: { category: slug } });
-    const topicsByCategory = (data && data.topicsByCategory) || [];
+    const { data: dataT } = useGetTopicsByCategory({
+        variables: { category: slug },
+    });
+    const { data: dataU } = useGetUser();
+    const topicsByCategory = (dataT && dataT.topicsByCategory) || [];
+    const user = (dataU && dataU.user) || null;
+
+    return { topicsByCategory, user };
+};
+
+const Topics = () => {
+    const [isReplierOpen, setReplierOpen] = useState(false);
+    const { topicsByCategory, user } = useInitialData();
 
     return (
         <BaseLayout>
@@ -22,6 +37,16 @@ const Topics = () => {
                 <div className="px-2">
                     <div className="pt-5 pb-4">
                         <h1>Select a Topic</h1>
+                        <button
+                            onClick={() => setReplierOpen(true)}
+                            disabled={!user}
+                            className="btn btn-primary"
+                        >
+                            Create Topic
+                        </button>
+                        {!user && (
+                            <i className="ml-2">Log in to create topic</i>
+                        )}
                     </div>
                 </div>
             </section>
@@ -48,6 +73,7 @@ const Topics = () => {
                     </tbody>
                 </table>
             </section>
+            <Replier isOpen={isReplierOpen} />
         </BaseLayout>
     );
 };

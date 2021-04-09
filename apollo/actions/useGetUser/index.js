@@ -2,4 +2,5 @@
 import { useQuery } from '@apollo/client';
 import { GET_USER } from '@/apollo/queries';
 
-export const useGetUser = () => useQuery(GET_USER);
+const useGetUser = () => useQuery(GET_USER);
+export default useGetUser;
