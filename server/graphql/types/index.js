@@ -77,6 +77,17 @@ const forumTypes = `
     content: String
     forumCategory: String
   }
+
+  type Post {
+    _id: ID
+    content: String
+    slug: String
+    fullSlug: String
+    topic: Topic
+    user: User
+    parent: Post
+    createdAt: String
+  }
 `;
 
 exports.typeDefs = gql`
@@ -95,6 +106,8 @@ exports.typeDefs = gql`
 
         topicsByCategory(category: String): [Topic]
         topicBySlug(slug: String): Topic
+
+        postsByTopic(slug: String): [Post]
     }
 
     type Mutation {
