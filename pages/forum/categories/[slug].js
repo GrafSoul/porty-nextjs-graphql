@@ -2,7 +2,7 @@
 import { useState } from 'react';
 // Apollo
 import { useQuery } from '@apollo/client';
-import { TOPICS_BY_CATEGORY } from '@/apollo/queries';
+import { TOPICS_BY_CATEGORY, TOPIC_BY_SLUG } from '@/apollo/queries';
 import withApollo from '@/hoc/withApollo';
 import { getDataFromTree } from '@apollo/client/react/ssr';
 import useGetUser from '@/apollo/actions/useGetUser';
@@ -16,6 +16,8 @@ import Replier from '@/components/helpers/Replier';
 const useInitialData = () => {
     const useGetTopicsByCategory = (options) =>
         useQuery(TOPICS_BY_CATEGORY, options);
+
+
     const router = useRouter();
     const { slug } = router.query;
     const { data: dataT } = useGetTopicsByCategory({
@@ -25,12 +27,12 @@ const useInitialData = () => {
     const topicsByCategory = (dataT && dataT.topicsByCategory) || [];
     const user = (dataU && dataU.user) || null;
 
-    return { topicsByCategory, user, slug };
+    return { topicsByCategory, user, slug, router };
 };
 
 const Topics = () => {
     const [isReplierOpen, setReplierOpen] = useState(false);
-    const { topicsByCategory, user, slug } = useInitialData();
+    const { topicsByCategory, user, slug, router } = useInitialData();
     const [createTopic] = useCreateTopic();
 
     const handleCreateTopic = (topicData, done) => {
@@ -40,6 +42,9 @@ const Topics = () => {
             done();
         });
     };
+
+    const goToTopic = (slug) =>
+        router.push('/forum/topics/[slug]', `/forum/topics/${slug}`);
 
     return (
         <BaseLayout>
@@ -72,7 +77,10 @@ const Topics = () => {
                     </thead>
                     <tbody>
                         {topicsByCategory.map((topic) => (
-                            <tr key={topic._id}>
+                            <tr
+                                key={topic._id}
+                                onClick={() => goToTopic(topic.slug)}
+                            >
                                 <th>{topic.title}</th>
                                 <td className="category">
                                     {topic.forumCategory.title}
