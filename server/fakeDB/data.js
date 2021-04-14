@@ -52,7 +52,7 @@ const data = {
         {
             _id: user3Id,
             avatar:
-                'https://f0.pngfuel.com/png/312/283/man-face-clip-art-png-clip-art-thumbnail.png',
+                'https://img.favpng.com/17/3/18/computer-icons-user-profile-male-png-favpng-ZmC9dDrp9x27KFnnge0jKWKBs.jpg',
             email: 'guest@mail.com',
             name: 'Visitor Developer',
             username: 'Visitor',
