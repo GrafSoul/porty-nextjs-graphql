@@ -22,18 +22,14 @@ const PostItem = ({ post, onReply, className = '', canCreate = false }) => {
                                         {post.user.username}
                                     </span>
                                 </div>
-                                <div className="date-container">
-                                    <span className="date">
-                                        {post.createdAt}
-                                    </span>
-                                    {post.createdAt && (
-                                        <div className="date-container">
-                                            <span className="date">
-                                                {fromNow(post.createdAt)}
-                                            </span>
-                                        </div>
-                                    )}
-                                </div>
+
+                                {post.createdAt && (
+                                    <div className="date-container">
+                                        <span className="date">
+                                            {fromNow(post.createdAt)}
+                                        </span>
+                                    </div>
+                                )}
                             </div>
                         </div>
                         <div className="topic-content">

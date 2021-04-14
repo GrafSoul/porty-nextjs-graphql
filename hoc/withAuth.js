@@ -1,5 +1,5 @@
 // Apollo
-import { useGetUser } from '@/apollo/actions/useGetUser';
+import useGetUser from '@/apollo/actions/useGetUser';
 // Components
 import Redirect from '@/components/helpers/Redirect';
 import SpinningLoader from '@/components/helpers/Loader';
