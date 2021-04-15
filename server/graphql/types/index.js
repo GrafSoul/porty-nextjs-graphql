@@ -88,6 +88,12 @@ const forumTypes = `
     parent: Post
     createdAt: String
   }
+
+  input PostInput {
+    content: String
+    parent: String
+    topic: String
+  }
 `;
 
 exports.typeDefs = gql`
@@ -116,6 +122,8 @@ exports.typeDefs = gql`
         deletePortfolio(id: ID): ID
 
         createTopic(input: TopicInput): Topic
+
+        createPost(input: PostInput): Post
 
         signUp(input: SignUpInput): String
         signIn(input: SignInInput): User
