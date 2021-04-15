@@ -1,7 +1,7 @@
 // Core
 import { useState, useRef } from 'react';
 // Apollo
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import useGetUser from '../../../apollo/actions/useGetUser';
 import { TOPIC_BY_SLUG, POSTS_BY_TOPIC } from '@/apollo/queries';
 import { CREATE_POST } from '@/apollo/mutation';
@@ -20,7 +20,6 @@ const useInitialData = () => {
     const { slug } = router.query;
     const useGetTopicBySlug = (options) => useQuery(TOPIC_BY_SLUG, options);
     const useGetPostsByTopic = (options) => useQuery(POSTS_BY_TOPIC, options);
-
     const { data: dataT } = useGetTopicBySlug({ variables: { slug } });
     const { data: dataP } = useGetPostsByTopic({ variables: { slug } });
     const { data: dataU } = useGetUser();
