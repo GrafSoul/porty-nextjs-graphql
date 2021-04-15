@@ -150,3 +150,37 @@ export const CREATE_TOPIC = gql`
         }
     }
 `;
+
+const postResponse = `
+    _id
+    content
+    slug
+    createdAt
+    user {
+        username
+        avatar
+    }
+    parent {
+        content
+        user {
+        username
+        avatar
+        }
+    }
+`;
+
+export const CREATE_POST = gql`
+    mutation CreatePost(
+        $content: String
+        $topic: String
+        $parent: String
+    ) {
+        createPost(input: {
+        content: $content
+        topic: $topic
+        parent: $parent
+        }) {
+        ${postResponse}
+        }
+    }
+`;

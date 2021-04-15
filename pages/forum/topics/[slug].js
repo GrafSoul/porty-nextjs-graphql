@@ -1,9 +1,10 @@
 // Core
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 // Apollo
 import { useQuery } from '@apollo/client';
 import useGetUser from '../../../apollo/actions/useGetUser';
 import { TOPIC_BY_SLUG, POSTS_BY_TOPIC } from '@/apollo/queries';
+import { CREATE_POST } from '@/apollo/mutation';
 import { useRouter } from 'next/router';
 import withApollo from '@/hoc/withApollo';
 import { getDataFromTree } from '@apollo/client/react/ssr';
@@ -11,12 +12,15 @@ import { getDataFromTree } from '@apollo/client/react/ssr';
 import PostItem from '@/components/forum/PostItem';
 import BaseLayout from '@/layouts/BaseLayout';
 import Replier from '@/components/helpers/Replier';
+// Toastify
+import { toast } from 'react-toastify';
 
 const useInitialData = () => {
     const router = useRouter();
     const { slug } = router.query;
     const useGetTopicBySlug = (options) => useQuery(TOPIC_BY_SLUG, options);
     const useGetPostsByTopic = (options) => useQuery(POSTS_BY_TOPIC, options);
+
     const { data: dataT } = useGetTopicBySlug({ variables: { slug } });
     const { data: dataP } = useGetPostsByTopic({ variables: { slug } });
     const { data: dataU } = useGetUser();
@@ -46,8 +50,27 @@ const PostPage = () => {
 };
 
 const Posts = ({ posts, topic, user }) => {
+    const pageEnd = useRef();
+    const useCreatePost = () => useMutation(CREATE_POST);
+    const [createPost, { error }] = useCreatePost();
     const [isReplierOpen, setReplierOpen] = useState(false);
     const [replyTo, setReplyTo] = useState(null);
+
+    const handleCreatePost = async (reply, resetReplier) => {
+        if (replyTo) {
+            reply.parent = replyTo._id;
+        }
+
+        reply.topic = topic._id;
+        await createPost({ variables: reply });
+        resetReplier();
+        setReplierOpen(false);
+        toast.success('Post has been created!', { autoClose: 2000 });
+        scrollToBottom();
+    };
+
+    const scrollToBottom = () =>
+        pageEnd.current.scrollIntoView({ behavior: 'smooth' });
 
     return (
         <section className="mb-5">
@@ -89,10 +112,11 @@ const Posts = ({ posts, topic, user }) => {
                     </div>
                 </div>
             </div>
+            <div ref={pageEnd}></div>
             <Replier
                 isOpen={isReplierOpen}
                 hasTitle={false}
-                onSubmit={() => {}}
+                onSubmit={handleCreatePost}
                 replyTo={(replyTo && replyTo.user.username) || topic.title}
                 onClose={() => setReplierOpen(false)}
                 closeBtn={() => (
