@@ -70,10 +70,22 @@ const PostPage = () => {
 
 const Posts = ({ posts, topic, user, fetchMore, ...pagination }) => {
     const pageEnd = useRef();
-    const useCreatePost = () => useMutation(CREATE_POST);
+
+    const useCreatePost = () =>
+        useMutation(CREATE_POST, {
+            update(cache) {
+                try {
+                    Object.keys(cache.data.data).forEach((key) => {
+                        key.match(/^Post/) && cache.data.delete(key);
+                    });
+                } catch (e) {}
+            },
+        });
+
     const [createPost, { error }] = useCreatePost();
     const [isReplierOpen, setReplierOpen] = useState(false);
     const [replyTo, setReplyTo] = useState(null);
+    const { pageSize, count, pageNum } = pagination;
 
     const handleCreatePost = async (reply, resetReplier) => {
         if (replyTo) {
@@ -84,13 +96,20 @@ const Posts = ({ posts, topic, user, fetchMore, ...pagination }) => {
 
         await createPost({ variables: reply });
 
-        await fetchMore({
-            updateQuery: (previousResults, { fetchMoreResult }) => {
-                return Object.assign({}, previousResults, {
-                    postsByTopic: [...fetchMoreResult.postsByTopic],
-                });
-            },
-        });
+        let lastPage = Math.ceil(count / pageSize);
+        if (count === 0) {
+            lastPage = 1;
+        }
+
+        lastPage === pageNum &&
+            (await fetchMore({
+                variables: { pageSize, pageNum: lastPage },
+                updateQuery: (previousResults, { fetchMoreResult }) => {
+                    return Object.assign({}, previousResults, {
+                        postsByTopic: { ...fetchMoreResult.postsByTopic },
+                    });
+                },
+            }));
         resetReplier();
         cleanup();
     };
