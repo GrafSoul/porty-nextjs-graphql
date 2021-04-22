@@ -46,13 +46,30 @@ const PostPage = () => {
                         </div>
                     </div>
                 </section>
-                <Posts posts={posts} topic={topic} {...rest} {...pagination} />
+                <Posts
+                    posts={posts}
+                    topic={topic}
+                    {...rest}
+                    {...pagination}
+                    onPageChange={(pageNum, pageSize) => {
+                        setPagination({ pageNum, pageSize });
+                    }}
+                />
             </div>
         </BaseLayout>
     );
 };
 
-const Posts = ({ posts, topic, user, fetchMore, count, pageSize }) => {
+const Posts = ({
+    posts,
+    topic,
+    user,
+    fetchMore,
+    count,
+    pageSize,
+    pageNum,
+    onPageChange,
+}) => {
     const pageEnd = useRef();
     const useCreatePost = () => useMutation(CREATE_POST);
     const [createPost, { error }] = useCreatePost();
@@ -126,7 +143,12 @@ const Posts = ({ posts, topic, user, fetchMore, count, pageSize }) => {
                             </div>
                         )}
                         <div className="pagination-container ml-auto">
-                            <AppPagination count={count} pageSize={pageSize} />
+                            <AppPagination
+                                count={count}
+                                pageSize={pageSize}
+                                onChange={onPageChange}
+                                pageNum={pageNum}
+                            />
                         </div>
                     </div>
                 </div>
