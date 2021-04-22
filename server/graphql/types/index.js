@@ -89,6 +89,11 @@ const forumTypes = `
     createdAt: String
   }
 
+  type PagPosts {
+    posts: [Post]
+    count: Int
+  }
+
   input PostInput {
     content: String
     parent: String
@@ -113,7 +118,7 @@ exports.typeDefs = gql`
         topicsByCategory(category: String): [Topic]
         topicBySlug(slug: String): Topic
 
-        postsByTopic(slug: String): [Post]
+        postsByTopic(slug: String): PagPosts
     }
 
     type Mutation {
